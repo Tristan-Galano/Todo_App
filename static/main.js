@@ -13,25 +13,28 @@ const Taskapp = {
     await this.getTasks();
   },
   methods: {
-    async getTasks() {
-      const responce = await fetch(window.location, {
-        method: "get",
-        headers: {
-          "X-Requsted-With": "XMLHttpRequest",
-        },
+    async sendRequest(url, method, data) {
+      const myHeaders = new Headers({
+        "Content-Type": "application/json",
+        "X-Requsted-With": "XMLHttpRequest",
       });
-      this.tasks = await responce.json();
+
+      const response = await fetch(url, {
+        method: method,
+        headers: myHeaders,
+        body: data,
+      });
+
+      return response;
+    },
+    async getTasks() {
+      const response = await this.sendRequest(window.location,'get')
+      this.tasks = await response.json();
     },
     async createTask() {
       await this.getTasks();
-      const response = await fetch(window.location + "create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Requsted-With": "XMLHttpRequest",
-        },
-        body: JSON.stringify(this.task),
-      });
+      await this.sendRequest(window.location + 'create','post',
+      JSON.stringify(this.task))
       await this.getTasks();
 
       this.task.name = "";
