@@ -33,12 +33,20 @@ const Taskapp = {
     },
     async createTask() {
       await this.getTasks();
+
       await this.sendRequest(window.location + 'create','post',
       JSON.stringify(this.task))
+
       await this.getTasks();
 
       this.task.name = "";
     },
+    async deleteTask(task){
+      await this.sendRequest(window.location + 'delete','post',
+      JSON.stringify(task))
+
+      await this.getTasks();
+    }
   },
   delimiters: ["{", "}"],
 };
