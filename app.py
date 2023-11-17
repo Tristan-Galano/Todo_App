@@ -32,7 +32,7 @@ def create_task():
     if form.validate():
         task = models.Task(name=form.name.data)
         
-        db.session.add()
+        db.session.add(task)
         db.session.commit()
 
         return jsonify(task)

@@ -4,7 +4,7 @@ const Taskapp = {
   data() {
     return {
       task: {
-        'name':''
+        name: "",
       },
       tasks: [],
     };
@@ -20,23 +20,22 @@ const Taskapp = {
           "X-Requsted-With": "XMLHttpRequest",
         },
       });
-
       this.tasks = await responce.json();
     },
-    async createTask(){
-        await this.getTasks()
-        const responce = await fetch(window.location + 'create',{
-            methods: 'post',
-            headers:{
-                'Content-Type': 'application/json',
-                "X-Requsted-With": "XMLHttpRequest",
-            },
-            body: JSON.stringify(this.task)
-        })
+    async createTask() {
+      await this.getTasks();
+      const response = await fetch(window.location + "create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Requsted-With": "XMLHttpRequest",
+        },
+        body: JSON.stringify(this.task),
+      });
+      await this.getTasks();
 
-        await this.getTasks()
-        
-    }
+      this.task.name = "";
+    },
   },
   delimiters: ["{", "}"],
 };
