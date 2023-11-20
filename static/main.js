@@ -27,10 +27,12 @@ const Taskapp = {
 
       return response;
     },
+
     async getTasks() {
       const response = await this.sendRequest(window.location,'get')
       this.tasks = await response.json();
     },
+
     async createTask() {
       await this.getTasks();
 
@@ -41,12 +43,22 @@ const Taskapp = {
 
       this.task.name = "";
     },
+
     async deleteTask(task){
       await this.sendRequest(window.location + 'delete','post',
       JSON.stringify(task))
 
       await this.getTasks();
-    }
+    },
+
+    async completeTask(task) {
+      await this.sendRequest(
+        window.location + "complete", "post",
+        JSON.stringify(task))
+
+      await this.getTasks();
+    },
+    
   },
   delimiters: ["{", "}"],
 };

@@ -14,8 +14,9 @@
     </form>
     <div class="mt-5">
         <div class="card mb-3" v-for="task, index in tasks" :key="index">
-            <div class="card-body row justify-content-between">
-                { task.name}
+            <div class="card-body row justify-content-between" @dblclick="completeTask(task)"
+                :class="{'complete': task.completed}">
+                { task.name }
                 <button type="submit" class="btn-close" @click="deleteTask(task)"></button>
             </div>
         </div>
