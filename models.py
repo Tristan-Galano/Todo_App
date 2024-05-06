@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from datetime import datetime
-
 import app
 
 @dataclass
@@ -8,7 +7,7 @@ class Task(app.db.Model):
 
     id: int
     name: str
-    date: datetime
+    date: date
     completed: bool
 
     id = app.db.Column(app.db.Integer(), primary_key=True, autoincrement=True)

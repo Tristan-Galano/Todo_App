@@ -61,8 +61,6 @@ def complete():
     db.session.commit()
     
     return jsonify({'result':'ok'}), 200
-
-  
 if __name__ == '__main__':
     app.run()
  
